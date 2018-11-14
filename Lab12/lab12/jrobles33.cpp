@@ -5,10 +5,8 @@ using namespace std;
 
 /*
 int Bottom_Up_Cut_Rod(int p[], int n){
-
 int r[n];
 r[0]=0;
-
 for (int j = 0; j < n; j++){
 	int q = min();
 	for (int i = 0; i < j; i++){
@@ -40,7 +38,7 @@ while( n > 0){
 	cout<<s[n]<<" ";
 	n = n-s[n];
 	}
-cout<<"-1";
+cout<<"-1"<<endl;
 return r[n];
 return s[n];
 
@@ -55,7 +53,6 @@ while (n > 0){
 	n = n-s[n];
 	}
 }
-
 */
 
 
@@ -78,11 +75,3 @@ Extended_Bottom_Up_Cut_Rod(prices, rod_length);
 
 
 }
-
-
-
-
-
-
-
-
