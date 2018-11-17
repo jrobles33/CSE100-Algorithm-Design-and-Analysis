@@ -1,30 +1,19 @@
 #include <iostream>
 #include <limits.h>
+#include <vector>
 
 using namespace std;
 
-void Print_Optimal_Parens(int i, int j, int n, int *s){
+vector<vector<int>>s;
+void Exp_Print_Optimal_Parens(vector<vector<int>>s,int i, int j){
 if (i == j){
 	cout<<"A"<<i-1;
 	}
 else {
 	cout<<"(";
-	Print_Optimal_Parens(i, *((s+i*n)+j),n,s);
+	Exp_Print_Optimal_Parens(s, i, s[i][j]);
 	cout<<".";
-	Print_Optimal_Parens(*((s+i*n)+j)+1,j,n,s);
-	cout<<")";
-}
-}
-
-void Exp_Print_Optimal_Parens(int s[][]){
-if (i == j){
-	cout<<"A"<<i-1;
-	}
-else {
-	cout<<"(";
-	Print_Optimal_Parens(i, *((s+i*n)+j),n,s);
-	cout<<".";
-	Print_Optimal_Parens(*((s+i*n)+j)+1,j,n,s);
+	Exp_Print_Optimal_Parens(s,s[i][j]+1,j);
 	cout<<")";
 }
 }
@@ -32,13 +21,14 @@ else {
 int Matrix_Chain_Order(int p[], int n){
 
 //int n = deltasize-1;
-int m[n][n];
-int s[n][n];
-for (int i = 1; i < n; i++){
+int m[n+1][n];
+//int s[n][n];
+s.resize(n,vector<int>(n+1));
+for (int i = 1; i <= n; i++){
 	m[i][i] = 0;
 	}
-for(int l = 2; l < n; l++){
-	for(int i = 1; i <n - l + 1; i++){
+for(int l = 2; l <= n; l++){
+	for(int i = 1; i <= n - l + 1; i++){
 		int j = i+l-1;
 		m[i][j] = INT_MAX;
 		for(int k = i; k <= j-1; k++){
@@ -51,9 +41,9 @@ for(int l = 2; l < n; l++){
 		}
 	}
 
-int key = m[1][n-1];
+int key = m[1][n];
 cout<<key<<endl;
-Print_Optimal_Parens(1,n-1,n, (int *)s);
+Exp_Print_Optimal_Parens(s,1,n);
 
 return key;
 }
@@ -67,11 +57,11 @@ cin>>first;
 int size = first+1;
 int p[size];
 
-for(int i = 0; i <size; i++){
+for(int i = 0; i <=first; i++){
 cin>>p[i];
 }
 
-int value = Matrix_Chain_Order(p,size);
+int value = Matrix_Chain_Order(p,first);
 //cout<<"value is "<<value;
 cout<<endl;
 return 0;
